@@ -2,6 +2,7 @@ package com.atguigu.mybatis.bean;
 
 import org.apache.ibatis.type.Alias;
 
+//MyBatis的别名
 @Alias("emp")
 public class Employee {
 	
