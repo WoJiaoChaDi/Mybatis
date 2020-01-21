@@ -32,6 +32,17 @@
 		</environment>
 	</environments>
 
+    <!--
+        2、settings包含很多重要的设置项
+            setting:用来设置每一个设置项
+            name：设置项名
+            value：设置项取值
+    -->
+    <settings>
+        <!--将数据库列 A_COLUMN 映射为 JavaBean字段的aColumn -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
 	<!-- 将我们写好的sql映射文件（EmployeeMapper.xml）一定要注册到全局配置文件（mybatis-config.xml）中 -->
 	<mappers>
 		<mapper resource="EmployeeMapper.xml" />
