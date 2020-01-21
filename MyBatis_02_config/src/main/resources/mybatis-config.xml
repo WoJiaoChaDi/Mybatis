@@ -75,6 +75,18 @@
 		</environment>
 	</environments>
 
+    <!-- 5、databaseIdProvider：支持多数据库厂商的；
+     type="DB_VENDOR"：VendorDatabaseIdProvider
+         作用就是得到数据库厂商的标识(驱动getDatabaseProductName())，mybatis就能根据数据库厂商标识来执行不同的sql;
+         MySQL，Oracle，SQL Server,xxxx
+  -->
+    <databaseIdProvider type="DB_VENDOR">
+        <!-- 为不同的数据库厂商起别名 -->
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle"/>
+        <property name="SQL Server" value="sqlserver"/>
+    </databaseIdProvider>
+
 	<!-- 将我们写好的sql映射文件（EmployeeMapper.xml）一定要注册到全局配置文件（mybatis-config.xml）中 -->
 	<mappers>
 		<mapper resource="EmployeeMapper.xml" />
