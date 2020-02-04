@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 1、接口式编程
@@ -151,6 +153,14 @@ public class MyBatisTest {
 			EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
 			Employee employee = mapper.getEmpByIdAndLastName(1, "tom");
 			System.out.println("1:---" + employee);
+
+			Map<String, Object> map = new HashMap<>();
+			map.put("id", 2);
+			map.put("lastName", "Tom");
+			map.put("tableName", "tbl_employee");
+			Employee employee2 = mapper.getEmpByMap(map);
+
+			System.out.println("2:---" + employee2);
 
 		}finally{
 			openSession.close();

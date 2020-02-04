@@ -94,5 +94,10 @@ public Employee getEmpById(Integer id);
  		select * from tbl_employee where id = #{id} and last_name=#{lastName}
  	</select>
 
+    <!-- public Employee getEmpByMap(Map<String, Object> map); -->
+    <select id="getEmpByMap" resultType="com.atguigu.mybatis.bean.Employee">
+ 		select * from ${tableName} where id=${id} and last_name=#{lastName}
+ 	</select>
+
 
 </mapper>
