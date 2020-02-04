@@ -89,5 +89,10 @@ public Employee getEmpById(Integer id);
 		delete from tbl_employee where id=#{id}
 	</delete>
 
+    <!--  public Employee getEmpByIdAndLastName(Integer id,String lastName);-->
+    <select id="getEmpByIdAndLastName" resultType="com.atguigu.mybatis.bean.Employee">
+ 		select * from tbl_employee where id = #{id} and last_name=#{lastName}
+ 	</select>
+
 
 </mapper>

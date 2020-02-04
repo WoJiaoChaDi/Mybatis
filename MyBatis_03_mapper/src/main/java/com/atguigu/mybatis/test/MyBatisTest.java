@@ -140,6 +140,23 @@ public class MyBatisTest {
 
 	}
 
+	@Test
+	public void test04() throws IOException{
+
+		SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+		//1、获取到的SqlSession不会自动提交数据
+		SqlSession openSession = sqlSessionFactory.openSession();
+
+		try{
+			EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+			Employee employee = mapper.getEmpByIdAndLastName(1, "tom");
+			System.out.println("1:---" + employee);
+
+		}finally{
+			openSession.close();
+		}
+	}
+
 	
 	
 }
