@@ -3,6 +3,7 @@ package com.atguigu.mybatis.test;
 import com.atguigu.mybatis.bean.Employee;
 import com.atguigu.mybatis.dao.EmployeeMapper;
 import com.atguigu.mybatis.dao.EmployeeMapperAnnotation;
+import com.atguigu.mybatis.dao.EmployeeMapperPlus;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -178,6 +179,21 @@ public class MyBatisTest {
 		}
 	}
 
-	
+	@Test
+	public void test05() throws IOException{
+		SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+		SqlSession openSession = sqlSessionFactory.openSession();
+		try{
+			EmployeeMapperPlus mapper = openSession.getMapper(EmployeeMapperPlus.class);
+			Employee empById = mapper.getEmpById(1);
+			System.out.println("1:--->" + empById);
+
+			Employee empByIdResultMap = mapper.getEmpById_resultMap(3);
+			System.out.println("2:--->" + empByIdResultMap);
+
+		}finally{
+			openSession.close();
+		}
+	}
 	
 }
