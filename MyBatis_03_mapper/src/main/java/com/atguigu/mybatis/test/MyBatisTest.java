@@ -168,6 +168,11 @@ public class MyBatisTest {
 				System.out.println("3:---" + employee3);
 			}
 
+			Map<String, Object> map4 = mapper.getEmpByIdReturnMap(1);
+			System.out.println("4:---" + map4);
+
+			Map<String, Employee> map5 = mapper.getEmpByLastNameLikeReturnMap("%e%");
+			System.out.println("5:---" + map5);
 		}finally{
 			openSession.close();
 		}
