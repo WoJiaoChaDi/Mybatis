@@ -19,6 +19,11 @@
     <settings>
         <!--将数据库列 A_COLUMN 映射为 JavaBean字段的aColumn -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+		<!--在我们数据为null的时候，有些数据库可能不能识别mybatis对null的默认处理。比如Oracle（报错）；-->
+		<!--JdbcType OTHER：无效的类型；因为mybatis对所有的null都映射的是原生Jdbc的OTHER类型，oracle不能-->
+		<!--将默认Null类型从 JDBCType.OTHER 改为 JDBCType.NULL-->
+		<setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
 
