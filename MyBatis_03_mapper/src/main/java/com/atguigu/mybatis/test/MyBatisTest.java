@@ -191,6 +191,9 @@ public class MyBatisTest {
 			Employee empByIdResultMap = mapper.getEmpById_resultMap(3);
 			System.out.println("2:--->" + empByIdResultMap);
 
+			Employee empAndDept = mapper.getEmpAndDept(3);
+			System.out.println("3:--->" + empAndDept);
+
 		}finally{
 			openSession.close();
 		}

@@ -8,4 +8,6 @@ public interface EmployeeMapperPlus {
 
 	public Employee getEmpById_resultMap(Integer id);
 
+    public Employee getEmpAndDept(Integer id);
+
 }

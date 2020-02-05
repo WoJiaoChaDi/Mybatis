@@ -33,4 +33,22 @@ id:唯一id方便引用
 		select * from tbl_employee where id=#{id}
 	</select>
 
+	<!--
+    联合查询：级联属性封装结果集
+  -->
+	<resultMap type="com.atguigu.mybatis.bean.Employee" id="MyDifEmp">
+		<id column="id" property="id"/>
+		<result column="last_name" property="lastName"/>
+		<result column="gender" property="gender"/>
+		<result column="did" property="dept.id"/>
+		<result column="dept_name" property="dept.departmentName"/>
+	</resultMap>
+
+	<!--  public Employee getEmpAndDept(Integer id);-->
+	<select id="getEmpAndDept" resultMap="MyDifEmp">
+		SELECT e.id id,e.last_name last_name,e.gender gender,e.d_id d_id,
+		d.id did,d.dept_name dept_name FROM tbl_employee e,tbl_dept d
+		WHERE e.d_id=d.id AND e.id=#{id}
+	</select>
+
 </mapper>
