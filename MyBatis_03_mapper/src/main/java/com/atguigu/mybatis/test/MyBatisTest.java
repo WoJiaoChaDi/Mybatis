@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -161,6 +162,11 @@ public class MyBatisTest {
 			Employee employee2 = mapper.getEmpByMap(map);
 
 			System.out.println("2:---" + employee2);
+
+			List<Employee> like = mapper.getEmpsByLastNameLike("%e%");
+			for (Employee employee3 : like) {
+				System.out.println("3:---" + employee3);
+			}
 
 		}finally{
 			openSession.close();

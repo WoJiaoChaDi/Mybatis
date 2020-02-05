@@ -99,5 +99,10 @@ public Employee getEmpById(Integer id);
  		select * from ${tableName} where id=${id} and last_name=#{lastName}
  	</select>
 
+    <!-- public List<Employee> getEmpsByLastNameLike(String lastName); -->
+    <!--resultType：如果返回的是一个集合，要写集合中元素的类型  -->
+    <select id="getEmpsByLastNameLike" resultType="com.atguigu.mybatis.bean.Employee">
+        select * from tbl_employee where last_name like #{lastName}
+    </select>
 
 </mapper>
