@@ -94,7 +94,7 @@
             mapper:注册一个sql映射
                 注册配置文件
                 resource：引用类路径下的sql映射文件
-                    mybatis/mapper/EmployeeMapper.xml
+                	比如在resource路径下：添加  mybatis/mapper/EmployeeMapper.xml
                 url：引用网路路径或者磁盘路径下的sql映射文件
                     file:///var/mappers/AuthorMapper.xml
 
