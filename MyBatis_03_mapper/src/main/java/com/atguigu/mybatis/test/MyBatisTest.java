@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 1、接口式编程
@@ -138,6 +140,30 @@ public class MyBatisTest {
 			openSession.close();
 		}
 	}
+
+    @Test
+    public void test04() throws IOException{
+
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        //1、获取到的SqlSession不会自动提交数据
+        SqlSession openSession = sqlSessionFactory.openSession();
+
+        try{
+            EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+            //Employee employee = mapper.getEmpByIdAndLastName(1, "tom");
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", 1);
+            map.put("lastName", "tom");
+            map.put("tableName", "tbl_employee");
+            Employee employee = mapper.getEmpByMap(map);
+
+            System.out.println(employee);
+
+        }finally{
+            openSession.close();
+        }
+    }
 	
 	
 }

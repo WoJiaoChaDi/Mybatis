@@ -28,6 +28,18 @@ public Employee getEmpById(Integer id);
 		from employees where EMPLOYEE_ID=#{id}
 	</select>
 
+    <!-- public Employee getEmpByMap(Map<String, Object> map); -->
+    <select id="getEmpByMap" resultType="com.atguigu.mybatis.bean.Employee">
+        select * from ${tableName} where id=${id} and last_name=#{lastName}
+    </select>
+
+    <!--  public Employee getEmpByIdAndLastName(Integer id,String lastName);-->
+    <select id="getEmpByIdAndLastName" resultType="com.atguigu.mybatis.bean.Employee">
+        select * from tbl_employee where id = #{id} and last_name=#{lastName}
+    </select>
+
+
+
 	<!-- public void addEmp(Employee employee); -->
 	<!-- parameterType：参数类型，可以省略，
 	获取自增主键的值：
