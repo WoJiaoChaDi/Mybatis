@@ -10,4 +10,6 @@ public interface EmployeeMapperPlus {
 
     public Employee getEmpAndDept(Integer id);
 
+    public Employee getEmpAndDept2(Integer id);
+
 }

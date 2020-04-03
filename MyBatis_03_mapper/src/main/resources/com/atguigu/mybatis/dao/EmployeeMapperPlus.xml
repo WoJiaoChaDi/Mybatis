@@ -34,6 +34,13 @@ id:唯一id方便引用
 	</select>
 
 	<!--
+	场景一：
+		查询Employee的同时查询员工对应的部门
+		Employee===Department
+		一个员工有与之对应的部门信息；
+		id  last_name  gender    d_id     did  dept_name (private Department dept;)
+	 -->
+	<!--
     联合查询：级联属性封装结果集
   -->
 	<resultMap type="com.atguigu.mybatis.bean.Employee" id="MyDifEmp">
@@ -46,6 +53,30 @@ id:唯一id方便引用
 
 	<!--  public Employee getEmpAndDept(Integer id);-->
 	<select id="getEmpAndDept" resultMap="MyDifEmp">
+		SELECT e.id id,e.last_name last_name,e.gender gender,e.d_id d_id,
+		d.id did,d.dept_name dept_name FROM tbl_employee e,tbl_dept d
+		WHERE e.d_id=d.id AND e.id=#{id}
+	</select>
+
+	<!--
+    使用association定义关联的单个对象的封装规则；
+ -->
+	<resultMap type="com.atguigu.mybatis.bean.Employee" id="MyDifEmp2">
+		<id column="id" property="id"/>
+		<result column="last_name" property="lastName"/>
+		<result column="gender" property="gender"/>
+
+		<!--  association可以指定联合的javaBean对象
+		property="dept"：指定哪个属性是联合的对象
+		javaType:指定这个属性对象的类型[不能省略]
+		-->
+		<association property="dept" javaType="com.atguigu.mybatis.bean.Department">
+			<id column="did" property="id"/>
+			<result column="dept_name" property="departmentName"/>
+		</association>
+	</resultMap>
+	<!--  public Employee getEmpAndDept(Integer id);-->
+	<select id="getEmpAndDept2" resultMap="MyDifEmp2">
 		SELECT e.id id,e.last_name last_name,e.gender gender,e.d_id d_id,
 		d.id did,d.dept_name dept_name FROM tbl_employee e,tbl_dept d
 		WHERE e.d_id=d.id AND e.id=#{id}
