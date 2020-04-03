@@ -193,14 +193,13 @@ public class MyBatisTest {
 			//System.out.println(empAndDept);
 			//System.out.println(empAndDept.getDept());
 
-			Employee empAndDept2 = mapper.getEmpAndDept2(3);
-			System.out.println(empAndDept2);
-			System.out.println(empAndDept2.getDept());
+			//Employee empAndDept2 = mapper.getEmpAndDept2(3);
+			//System.out.println(empAndDept2);
+			//System.out.println(empAndDept2.getDept());
 
-			//Employee employee = mapper.getEmpByIdStep(3);
-			//System.out.println(employee);
-			//System.out.println(employee.getDept());
-			//System.out.println(employee.getDept());
+			Employee employee = mapper.getEmpByIdStep(3);
+			System.out.println(employee);
+			System.out.println(employee.getDept());
 		}finally{
 			openSession.close();
 		}
