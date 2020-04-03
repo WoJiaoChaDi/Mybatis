@@ -19,6 +19,10 @@
     <settings>
         <!--将数据库列 A_COLUMN 映射为 JavaBean字段的aColumn -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+		<!--jdbcType为空的时候，原来默认映射为OTHER，现在默认为NULL-->
+        <!--配置了这个后，#{}的时候就不用设置jdbcType了  例如这样：#{email,jdbcType=NULL})-->
+		<setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
 

@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -157,8 +158,21 @@ public class MyBatisTest {
             map.put("lastName", "tom");
             map.put("tableName", "tbl_employee");
             Employee employee = mapper.getEmpByMap(map);
-
             System.out.println(employee);
+
+            System.out.println("模糊查询List");
+            List<Employee> like = mapper.getEmpsByLastNameLike("%e%");
+			for (Employee employee2 : like) {
+				System.out.println(employee2);
+			}
+
+            System.out.println("返回Map类型的");
+			Map<String, Object> map1 = mapper.getEmpByIdReturnMap(1);
+			System.out.println(map1);
+
+			//返回Map类型，Key值为
+			Map<String, Employee> map2 = mapper.getEmpByLastNameLikeReturnMap("%e%");
+			System.out.println(map2);
 
         }finally{
             openSession.close();
