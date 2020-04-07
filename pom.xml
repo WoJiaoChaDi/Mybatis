@@ -14,6 +14,7 @@
         <module>MyBatis_03_mapper</module>
         <module>MyBatis_04_DynamicSQL</module>
         <module>Mybatis_05_Cache</module>
+        <module>Mybatis_06_ssm</module>
     </modules>
 
 
