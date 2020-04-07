@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -274,6 +275,34 @@ public class MyBatisTest {
 				System.out.println(emp);
 			}
 
+			System.out.println("===测试set标签===");
+			//测试set标签
+			employee = new Employee(3, "改名叫张三", null, null);
+			mapper.updateEmp(employee);
+			openSession.commit();
+
+			System.out.println("===测试foreach标签===");
+			List<Employee> list2 = mapper.getEmpsByConditionForeach(Arrays.asList(3,2));
+			for (Employee emp : list2) {
+				System.out.println(emp);
+			}
+
+		}finally{
+			openSession.close();
+		}
+	}
+
+	@Test
+	public void testBatchSave() throws IOException{
+		SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+		SqlSession openSession = sqlSessionFactory.openSession();
+		try{
+			EmployeeMapperDynamicSQL mapper = openSession.getMapper(EmployeeMapperDynamicSQL.class);
+			List<Employee> emps = new ArrayList<>();
+			emps.add(new Employee(null, "smith0x1", "smith0x1@atguigu.com", "1",new Department(1)));
+			emps.add(new Employee(null, "allen0x1", "allen0x1@atguigu.com", "0",new Department(1)));
+			mapper.addEmps(emps);
+			openSession.commit();
 		}finally{
 			openSession.close();
 		}

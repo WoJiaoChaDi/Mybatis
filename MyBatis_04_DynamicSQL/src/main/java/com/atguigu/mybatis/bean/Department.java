@@ -3,13 +3,23 @@ package com.atguigu.mybatis.bean;
 import java.util.List;
 
 public class Department {
-	
+
 	private Integer id;
 	private String departmentName;
 	private List<Employee> emps;
-	
-	
-	
+
+
+
+
+
+	public Department(Integer id) {
+		super();
+		this.id = id;
+	}
+	public Department() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public List<Employee> getEmps() {
 		return emps;
 	}
@@ -33,7 +43,7 @@ public class Department {
 		return "Department [id=" + id + ", departmentName=" + departmentName
 				+ "]";
 	}
-	
-	
+
+
 
 }
