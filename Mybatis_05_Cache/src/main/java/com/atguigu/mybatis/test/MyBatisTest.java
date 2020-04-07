@@ -1,6 +1,8 @@
 package com.atguigu.mybatis.test;
 
+import com.atguigu.mybatis.bean.Department;
 import com.atguigu.mybatis.bean.Employee;
+import com.atguigu.mybatis.dao.DepartmentMapper;
 import com.atguigu.mybatis.dao.EmployeeMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -82,4 +84,76 @@ public class MyBatisTest {
 			openSession.close();
 		}
 	}
+
+
+    //* 二级缓存：（全局缓存）：基于namespace级别的缓存：一个namespace对应一个二级缓存：
+    //* 		工作机制：
+    //* 		1、一个会话，查询一条数据，这个数据就会被放在当前会话的一级缓存中；
+    //* 		2、如果会话关闭；一级缓存中的数据会被保存到二级缓存中；新的会话查询信息，就可以参照二级缓存中的内容；
+    //* 		3、sqlSession===EmployeeMapper==>Employee
+    //* 						DepartmentMapper===>Department
+    //* 			不同namespace查出的数据会放在自己对应的缓存中（map）
+    //* 			效果：数据会从二级缓存中获取
+    //* 				查出的数据都会被默认先放在一级缓存中。
+    //* 				只有会话提交或者关闭以后，一级缓存中的数据才会转移到二级缓存中
+    //* 		使用：
+    //* 			1）、开启全局二级缓存配置：<setting name="cacheEnabled" value="true"/>
+    //* 			2）、去mapper.xml中配置使用二级缓存：
+    //* 				<cache></cache>
+    //* 			3）、我们的POJO需要实现序列化接口
+
+    @Test
+    public void testSecondLevelCache() throws IOException{
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession openSession = sqlSessionFactory.openSession();
+        SqlSession openSession2 = sqlSessionFactory.openSession();
+        try{
+            //1、
+            EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+            EmployeeMapper mapper2 = openSession2.getMapper(EmployeeMapper.class);
+
+            System.out.println("===第一次会话===");
+            Employee emp01 = mapper.getEmpById(1);
+            System.out.println(emp01);
+            //必须在会话关了后，才放在二级缓存中
+            openSession.close();
+
+            //第二次查询是从二级缓存中拿到的数据，并没有发送新的sql
+            //mapper2.addEmp(new Employee(null, "aaa", "nnn", "0"));
+            System.out.println("===第二次会话===");
+            Employee emp02 = mapper2.getEmpById(1);
+            System.out.println(emp02);
+            openSession2.close();
+
+        }finally{
+
+        }
+    }
+
+    @Test
+    public void testSecondLevelCache02() throws IOException{
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession openSession = sqlSessionFactory.openSession();
+        SqlSession openSession2 = sqlSessionFactory.openSession();
+        try{
+            //1、
+            DepartmentMapper mapper = openSession.getMapper(DepartmentMapper.class);
+            DepartmentMapper mapper2 = openSession2.getMapper(DepartmentMapper.class);
+
+            System.out.println("===第一次会话===");
+            Department deptById = mapper.getDeptById(1);
+            System.out.println(deptById);
+            openSession.close();
+
+            System.out.println("===第二次会话===");
+            Department deptById2 = mapper2.getDeptById(1);
+            System.out.println(deptById2);
+            openSession2.close();
+            //第二次查询是从二级缓存中拿到的数据，并没有发送新的sql
+
+        }finally{
+
+        }
+    }
+
 }
