@@ -13,6 +13,7 @@
         <module>MyBatis_02_config</module>
         <module>MyBatis_03_mapper</module>
         <module>MyBatis_04_DynamicSQL</module>
+        <module>Mybatis_05_Cache</module>
     </modules>
 
 
