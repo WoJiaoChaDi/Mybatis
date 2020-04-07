@@ -5,6 +5,7 @@ import com.atguigu.mybatis.bean.Employee;
 import com.atguigu.mybatis.dao.DepartmentMapper;
 import com.atguigu.mybatis.dao.EmployeeMapper;
 import com.atguigu.mybatis.dao.EmployeeMapperAnnotation;
+import com.atguigu.mybatis.dao.EmployeeMapperDynamicSQL;
 import com.atguigu.mybatis.dao.EmployeeMapperPlus;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -14,6 +15,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -237,6 +239,41 @@ public class MyBatisTest {
 			EmployeeMapperPlus mapper = openSession.getMapper(EmployeeMapperPlus.class);
 			Employee employee = mapper.getEmpById_MyEmpDis(2);
 			System.out.println(employee);
+		}finally{
+			openSession.close();
+		}
+	}
+
+	@Test
+	public void testDynamicSql() throws IOException{
+		SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+		SqlSession openSession = sqlSessionFactory.openSession();
+		try{
+			EmployeeMapperDynamicSQL mapper = openSession.getMapper(EmployeeMapperDynamicSQL.class);
+			//select * from tbl_employee where id=? and last_name like ?
+			//测试if\where
+			Employee employee = new Employee(null, "%to%", null, null);
+			List<Employee> emps = mapper.getEmpsByConditionIf(employee );
+			for (Employee emp : emps) {
+				System.out.println(emp);
+			}
+
+			System.out.println("===测试Trim===");
+			//测试Trim
+			List<Employee> emps2 = mapper.getEmpsByConditionTrim(employee);
+			for (Employee emp : emps2) {
+				System.out.println(emp);
+			}
+
+
+			System.out.println("===测试choose===");
+			//测试choose
+			employee = new Employee(null, null, null, null);
+			List<Employee> list = mapper.getEmpsByConditionChoose(employee);
+			for (Employee emp : list) {
+				System.out.println(emp);
+			}
+
 		}finally{
 			openSession.close();
 		}
