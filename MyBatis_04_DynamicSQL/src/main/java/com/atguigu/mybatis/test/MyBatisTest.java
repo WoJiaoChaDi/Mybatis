@@ -308,4 +308,20 @@ public class MyBatisTest {
 		}
 	}
 
+	@Test
+	public void testInnerParam() throws IOException{
+		SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+		SqlSession openSession = sqlSessionFactory.openSession();
+		try{
+			EmployeeMapperDynamicSQL mapper = openSession.getMapper(EmployeeMapperDynamicSQL.class);
+			Employee employee2 = new Employee();
+			employee2.setLastName("%e%");
+			List<Employee> list = mapper.getEmpsTestInnerParameter(employee2);
+			for (Employee employee : list) {
+				System.out.println(employee);
+			}
+		}finally{
+			openSession.close();
+		}
+	}
 }
