@@ -23,6 +23,11 @@
 		<!--jdbcType为空的时候，原来默认映射为OTHER，现在默认为NULL-->
         <!--配置了这个后，#{}的时候就不用设置jdbcType了  例如这样：#{email,jdbcType=NULL})-->
 		<setting name="jdbcTypeForNull" value="NULL"/>
+
+		<!-- 延迟加载懒加载 -->
+		<!--显示的指定每个我们需要更改的配置的值，即使他是默认的。防止版本更新带来的问题  -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
 
