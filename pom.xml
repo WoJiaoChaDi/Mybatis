@@ -12,6 +12,7 @@
         <module>MyBatis_01_HelloWorld</module>
         <module>MyBatis_02_config</module>
         <module>MyBatis_03_mapper</module>
+        <module>MyBatis_04_DynamicSQL</module>
     </modules>
 
 
