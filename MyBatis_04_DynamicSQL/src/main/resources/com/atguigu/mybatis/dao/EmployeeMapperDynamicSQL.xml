@@ -233,7 +233,7 @@
 	  		<if test="_databaseId=='mysql'">
 	  			select * from tbl_employee
 	  			<if test="_parameter!=null">
-	  				where last_name like #{lastName}
+	  				where last_name like #{_lastName}
 	  			</if>
 	  		</if>
 	  		<if test="_databaseId=='oracle'">
