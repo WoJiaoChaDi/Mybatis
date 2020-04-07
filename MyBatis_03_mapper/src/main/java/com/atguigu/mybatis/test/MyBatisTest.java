@@ -228,4 +228,18 @@ public class MyBatisTest {
 		}
 	}
 
+	@Test
+	public void test_discriminator() throws IOException{
+		SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+		SqlSession openSession = sqlSessionFactory.openSession();
+
+		try{
+			EmployeeMapperPlus mapper = openSession.getMapper(EmployeeMapperPlus.class);
+			Employee employee = mapper.getEmpById_MyEmpDis(2);
+			System.out.println(employee);
+		}finally{
+			openSession.close();
+		}
+	}
+
 }

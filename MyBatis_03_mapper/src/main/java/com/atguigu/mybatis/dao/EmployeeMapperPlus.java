@@ -14,4 +14,6 @@ public interface EmployeeMapperPlus {
 
     public Employee getEmpByIdStep(Integer id);
 
+    public Employee getEmpById_MyEmpDis(Integer id);
+
 }
