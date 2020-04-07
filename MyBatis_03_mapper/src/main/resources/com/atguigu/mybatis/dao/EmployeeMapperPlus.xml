@@ -113,4 +113,13 @@ id:唯一id方便引用
         </if>
     </select>
 
+	<!--
+	场景二：
+		查询部门的时候将部门对应的所有员工信息也查询出来：注释在DepartmentMapper.xml中
+	 -->
+	<!-- public List<Employee> getEmpsByDeptId(Integer deptId); -->
+	<select id="getEmpsByDeptId" resultType="com.atguigu.mybatis.bean.Employee">
+		select * from tbl_employee where d_id=#{deptId}
+	</select>
+
 </mapper>
