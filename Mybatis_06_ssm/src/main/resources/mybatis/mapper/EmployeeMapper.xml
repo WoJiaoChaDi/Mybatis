@@ -9,4 +9,8 @@
 		select * from tbl_employee where id=#{id}
 	</select>
 
+	<!--public List<Employee> getEmps();  -->
+	<select id="getEmps" resultType="com.atguigu.mybatis.bean.Employee">
+		select * from tbl_employee
+	</select>
 </mapper>
