@@ -1,6 +1,7 @@
 package com.atguigu.mybatis.test;
 
 import com.atguigu.mybatis.bean.Employee;
+import com.atguigu.mybatis.bean.EmployeeExample;
 import com.atguigu.mybatis.dao.EmployeeMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -47,10 +48,50 @@ public class MyBatisTest {
         SqlSession openSession = sqlSessionFactory.openSession();
         try{
             EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
-            List<Employee> list = mapper.selectAll();
+            List<Employee> list = mapper.selectByExample(null);
             for (Employee employee : list) {
                 System.out.println(employee.getLastName());
             }
+        }finally{
+            openSession.close();
+        }
+    }
+
+    @Test
+    public void testMyBatis3() throws IOException{
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession openSession = sqlSessionFactory.openSession();
+        try{
+            EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+
+            //xxxExample就是封装查询条件的
+            //1、查询所有
+            List<Employee> emps = mapper.selectByExample(null);
+            for (Employee employee : emps) {
+                System.out.println(employee.getLastName());
+            }
+
+            System.out.println("====条件查询===");
+            //2、查询员工名字中有e字母的，和员工性别是1的
+            //封装员工查询条件的example
+            EmployeeExample example = new EmployeeExample();
+            //创建一个Criteria，这个Criteria就是拼装查询条件
+            //select id, last_name, email, gender, d_id from tbl_employee
+            //WHERE ( last_name like ? and gender = ? ) or email like "%e%"
+            EmployeeExample.Criteria criteria = example.createCriteria();
+            criteria.andLastNameLike("%e%");
+            criteria.andGenderEqualTo("1");
+
+            //拼接or条件
+            EmployeeExample.Criteria criteria2 = example.createCriteria();
+            criteria2.andEmailLike("%e%");
+            example.or(criteria2);
+
+            List<Employee> list = mapper.selectByExample(example);
+            for (Employee employee : list) {
+                System.out.println(employee.getId() + "\t" + employee.getLastName() + "\t" + employee.getEmail());
+            }
+
         }finally{
             openSession.close();
         }
