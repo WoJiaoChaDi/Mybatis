@@ -15,6 +15,7 @@
         <module>MyBatis_04_DynamicSQL</module>
         <module>Mybatis_05_Cache</module>
         <module>Mybatis_06_ssm</module>
+        <module>Mybatis_07_MBG_MybatisGenerator</module>
     </modules>
 
 </project>
