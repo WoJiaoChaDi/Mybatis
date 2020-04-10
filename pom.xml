@@ -16,6 +16,7 @@
         <module>Mybatis_05_Cache</module>
         <module>Mybatis_06_ssm</module>
         <module>Mybatis_07_MBG_MybatisGenerator</module>
+        <module>Mybatis_09_source</module>
     </modules>
 
 </project>
