@@ -14,6 +14,8 @@ public interface EmployeeMapper {
 
     public Long addEmp(Employee employee);
 
+    public Long addEmpStatus(Employee employee);
+
     //Oracle分页查询数据
 	public void getPageByProcedure(OraclePage page);
 }

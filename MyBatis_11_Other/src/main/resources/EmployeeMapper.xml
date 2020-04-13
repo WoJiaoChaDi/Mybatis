@@ -18,7 +18,7 @@ public Employee getEmpById(Integer id);
 
 	<!--接口与sql文件动态绑定-->
 	<select id="getEmpById" resultType="com.atguigu.mybatis.bean.Employee">
-		select id,last_name lastName,email,gender from tbl_employee where id = #{id}
+		select id,last_name lastName,email,gender,empStatus from tbl_employee where id = #{id}
 	</select>
 
 	<!--public List<Employee> getEmps();  -->
@@ -31,6 +31,12 @@ public Employee getEmpById(Integer id);
 		insert into tbl_employee(last_name,email,gender)
 		values(#{lastName},#{email},#{gender})
 	</insert>
+
+	<insert id="addEmpStatus" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_employee(last_name,email,gender,empStatus)
+		values(#{lastName},#{email},#{gender},#{empStatus})
+	</insert>
+
 
 	<!-- public void getPageByProcedure();
 		1、使用select标签定义调用存储过程

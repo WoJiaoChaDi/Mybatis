@@ -6,6 +6,8 @@ public class Employee {
 	private String lastName;
 	private String email;
 	private String gender;
+	//员工状态
+	private EmpStatus empStatus=EmpStatus.LOGOUT;
 
 
 	public Employee(String lastName, String email, String gender) {
@@ -20,6 +22,12 @@ public class Employee {
 	}
 
 
+	public EmpStatus getEmpStatus() {
+		return empStatus;
+	}
+	public void setEmpStatus(EmpStatus empStatus) {
+		this.empStatus = empStatus;
+	}
 	public Integer getId() {
 		return id;
 	}
