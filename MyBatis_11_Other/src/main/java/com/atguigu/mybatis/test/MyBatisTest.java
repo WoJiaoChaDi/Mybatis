@@ -2,6 +2,9 @@ package com.atguigu.mybatis.test;
 
 import com.atguigu.mybatis.bean.Employee;
 import com.atguigu.mybatis.dao.EmployeeMapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -81,9 +84,36 @@ public class MyBatisTest {
 			// 3、获取接口的实现类对象
 			//会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
 			EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+
+			//使用pageHelper分页插件进行分页
+			Page<Object> page = PageHelper.startPage(2, 5);
+
 			List<Employee> emps = mapper.getEmps();
+
+			//传入要连续显示多少页(第一页 1-5  第二页 1-5  第三页 1-5  第六页 6-7 第七页 6-7...)
+			PageInfo<Employee> info = new PageInfo<>(emps);
+			//PageInfo<Employee> info = new PageInfo<>(emps, 5);
+
 			for (Employee emp : emps) {
 				System.out.println(emp);
+			}
+
+			System.out.println("当前页码："+page.getPageNum());
+			System.out.println("总记录数："+page.getTotal());
+			System.out.println("每页的记录数："+page.getPageSize());
+			System.out.println("总页码："+page.getPages());
+			System.out.println();
+
+			//pageInfo信息
+			System.out.println("当前页码："+info.getPageNum());
+			System.out.println("总记录数："+info.getTotal());
+			System.out.println("每页的记录数："+info.getPageSize());
+			System.out.println("总页码："+info.getPages());
+			System.out.println("是否第一页："+info.isIsFirstPage());
+			System.out.println("连续显示的页码：");
+			int[] nums = info.getNavigatepageNums();
+			for (int i = 0; i < nums.length; i++) {
+				System.out.println(nums[i]);
 			}
 		} finally {
 			openSession.close();

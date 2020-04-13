@@ -40,6 +40,13 @@
             <version>1.2.17</version>
         </dependency>
 
+        <!--pageHelper 需要对应版本5.x.x版本 和 4.x.x版本不一样-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.2</version>
+        </dependency>
+
     </dependencies>
 
 
