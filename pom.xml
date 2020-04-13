@@ -18,6 +18,7 @@
         <module>Mybatis_07_MBG_MybatisGenerator</module>
         <module>Mybatis_09_source</module>
         <module>Mybatis_10_plugin</module>
+        <module>MyBatis_11_Other</module>
     </modules>
 
 </project>
