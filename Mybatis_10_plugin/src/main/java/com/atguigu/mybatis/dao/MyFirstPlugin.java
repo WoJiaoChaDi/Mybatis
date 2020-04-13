@@ -66,7 +66,7 @@ public class MyFirstPlugin implements Interceptor {
 	@Override
 	public void setProperties(Properties properties) {
 		// TODO Auto-generated method stub
-		System.out.println("插件配置的信息："+properties);
+		System.out.println("MyFirstPlugin插件配置的信息："+properties);
 	}
 
 }
