@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * 1、接口式编程
@@ -80,9 +81,10 @@ public class MyBatisTest {
 			// 3、获取接口的实现类对象
 			//会为接口自动的创建一个代理对象，代理对象去执行增删改查方法
 			EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
-			Employee employee = mapper.getEmpById(1);
-			System.out.println(mapper.getClass());
-			System.out.println(employee);
+			List<Employee> emps = mapper.getEmps();
+			for (Employee emp : emps) {
+				System.out.println(emp);
+			}
 		} finally {
 			openSession.close();
 		}
