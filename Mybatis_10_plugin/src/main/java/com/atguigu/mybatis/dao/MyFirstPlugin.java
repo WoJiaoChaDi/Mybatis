@@ -28,6 +28,8 @@ public class MyFirstPlugin implements Interceptor {
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
 		// TODO Auto-generated method stub
+
+        //改变Mybatis的sql逻辑
 		System.out.println("MyFirstPlugin...intercept:"+invocation.getMethod());
 		//动态的改变一下sql运行的参数：以前1号员工，实际从数据库查询3号员工
 		Object target = invocation.getTarget();
@@ -38,7 +40,9 @@ public class MyFirstPlugin implements Interceptor {
 		Object value = metaObject.getValue("parameterHandler.parameterObject");
 		System.out.println("sql语句用的参数是："+value);
 		//修改完sql语句要用的参数
-		metaObject.setValue("parameterHandler.parameterObject", 11);
+		metaObject.setValue("parameterHandler.parameterObject", 3);
+
+
 		//执行目标方法
 		Object proceed = invocation.proceed();
 		//返回执行后的返回值
