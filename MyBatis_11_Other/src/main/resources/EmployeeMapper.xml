@@ -25,4 +25,11 @@ public Employee getEmpById(Integer id);
 	<select id="getEmps" resultType="com.atguigu.mybatis.bean.Employee">
 		select id,last_name lastName,email,gender from tbl_employee
 	</select>
+
+	<!--public Long addEmp(Employee employee);  -->
+	<insert id="addEmp" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_employee(last_name,email,gender)
+		values(#{lastName},#{email},#{gender})
+	</insert>
+
 </mapper>

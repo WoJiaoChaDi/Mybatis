@@ -1,13 +1,25 @@
 package com.atguigu.mybatis.bean;
 
 public class Employee {
-	
+
 	private Integer id;
 	private String lastName;
 	private String email;
 	private String gender;
-	
-	
+
+
+	public Employee(String lastName, String email, String gender) {
+		super();
+		this.lastName = lastName;
+		this.email = email;
+		this.gender = gender;
+	}
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -37,7 +49,8 @@ public class Employee {
 		return "Employee [id=" + id + ", lastName=" + lastName + ", email="
 				+ email + ", gender=" + gender + "]";
 	}
-	
-	
+
+
 
 }
+
