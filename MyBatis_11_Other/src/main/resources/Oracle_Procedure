@@ -1,0 +1,10 @@
+create or replace procedure
+    hello_test(
+        p_start in int, p_end in int, p_count out int, p_emps out sys_refcursor
+    ) as
+begin
+    select count(*) into p_count from employees;
+    open p_emps for
+        select * from (select rownum rn, e.* from employees e where rownum <= p_end)
+            where rn >= p_start;
+end hello_test;

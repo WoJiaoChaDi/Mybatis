@@ -1,6 +1,7 @@
 package com.atguigu.mybatis.test;
 
 import com.atguigu.mybatis.bean.Employee;
+import com.atguigu.mybatis.bean.OraclePage;
 import com.atguigu.mybatis.dao.EmployeeMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -147,4 +148,31 @@ public class MyBatisTest {
         }
 
     }
+
+	/**
+	 * oracle分页：
+	 * 		借助rownum：行号；子查询；
+	 * 存储过程包装分页逻辑
+	 * @throws IOException
+	 */
+	@Test
+	public void testProcedure() throws IOException{
+		SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+		SqlSession openSession = sqlSessionFactory.openSession();
+		try{
+			EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
+			OraclePage page = new OraclePage();
+			page.setStart(1);
+			page.setEnd(5);
+			mapper.getPageByProcedure(page);
+
+			System.out.println("总记录数："+page.getCount());
+			System.out.println("查出的数据："+page.getEmps().size());
+			System.out.println("查出的数据："+page.getEmps());
+		}finally{
+			openSession.close();
+		}
+
+	}
+
 }
