@@ -94,10 +94,18 @@ public class MyBatisTest {
 	 }
 
 	 */
+	/**
+	 * 插件编写：
+	 * 1、编写Interceptor的实现类
+	 * 2、使用@Intercepts注解完成插件签名
+	 * 3、将写好的插件注册到全局配置文件中
+	 *
+	 */
 	@Test
-	public void testPlugin(){
+	public void testPlugin() throws IOException {
 
-
+		//测试插件
+		test01();
 	}
 
 }
