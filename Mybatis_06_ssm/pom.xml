@@ -28,7 +28,7 @@
         <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
-            <version>1.10.2</version>
+            <version>1.10.8</version>
         </dependency>
 
         <!-- Javassist（JAVA编程ASSISTant）使Java字节码操作变得简单。它是一个用于在Java中编辑字节码的类库 -->
